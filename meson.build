@@ -10,8 +10,16 @@ project(
     meson_version: '>= 0.60.0',
 )
 
+cmake = import('cmake')
+
+
+funchook = cmake.subproject('funchook')
+
+funchook_lib = funchook.dependency('funchook-shared')
 
 executable('locksmith',
            'main.cpp'
 )
+
+library('locksmith_inject', 'locksmith_inject.cpp', dependencies: [ funchook_lib ])
 
