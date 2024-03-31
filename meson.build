@@ -16,10 +16,11 @@ cmake = import('cmake')
 funchook = cmake.subproject('funchook')
 
 funchook_lib = funchook.dependency('funchook-shared')
+incdir = include_directories('./subprojects/funchook/include')
 
 executable('locksmith',
            'main.cpp'
 )
 
-library('locksmith_inject', 'locksmith_inject.cpp', dependencies: [ funchook_lib ])
+library('locksmith_inject', 'locksmith_inject.cpp', dependencies: [ funchook_lib ], include_directories: incdir)
 
